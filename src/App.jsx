@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import orangeCut from "./assets/orange2.png";
@@ -14,15 +14,17 @@ import "./App.css";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
+  const menuIconRef = useRef(null);
+  const navtlRef = useRef(null);
+
   useEffect(() => {
-    // Timeline for the '.two' section
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".two",
         start: "0% 95%",
         end: "70% 50%",
         scrub: true,
-        // markers: true,
+        markers: true,
       },
     });
 
@@ -70,7 +72,6 @@ export default function App() {
         "orange"
       );
 
-    // Timeline for the '.three' section
     const tl2 = gsap.timeline({
       scrollTrigger: {
         trigger: ".three",
@@ -136,10 +137,44 @@ export default function App() {
         },
         "ca"
       );
+
+    const navtl = gsap.timeline({ paused: true });
+
+    navtl.to(".fullnav", {
+      right: 0,
+      duration: 0.6,
+    });
+
+    navtl.from(
+      ".fullnav h4",
+      {
+        duration: 0.7,
+        stagger: 0.3,
+   
+      }
+    );
+    
+    navtlRef.current = navtl;
   }, []);
 
+  const handleMenuClick = () => {
+    console.log(menuIconRef.current);
+
+    if (navtlRef.current) {
+      navtlRef.current.play();
+    }
+  };
+
+  const handleCloseClick = () => {
+    if (navtlRef.current) {
+      navtlRef.current.reverse();
+    }
+  }; 
   return (
-    <div id="main" className="w-full h-screen bg-orange-600 overflow-x-hidden">
+    <div
+      id="main"
+      className="w-screen h-screen bg-orange-600 overflow-x-hidden relative"
+    >
       <nav className="fixed flex items-center justify-between w-full h-[10vh] p-0 px-[10vw] z-50">
         <a href="#" className="text-white text-[1vw] no-underline">
           ABHISHEK
@@ -159,33 +194,65 @@ export default function App() {
           </a>
         </div>
         <i
-          className="ri-menu-fill text-[1.5vw] text-white"
-          aria-hidden="true"
-        ></i>
+          className="text-white text-[2vw] cursor-pointer"
+          ref={menuIconRef}
+          onClick={handleMenuClick}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-8 h-8"
+          >
+            <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
+          </svg>
+        </i>
       </nav>
 
-      <div className="relative flex items-center justify-center w-full h-screen bg-gradient-to-br from-orange-400 to-orange-600">
+      <div className="fullnav flex flex-col fixed top-0 right-[-40%] w-[40%] h-screen  z-50 justify-center align-center ">
+
+      <i
+          className="text-black text-[3vw] cursor-pointer absolute top-4 right-4"
+          onClick={handleCloseClick}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-8 h-8"
+          >
+            <path d="M18 6L6 18M6 6l12 12"></path>
+          </svg>
+        </i>
+
+        <h4 className="text-[7vw] font-bold"> Home</h4>
+        <h4 className="text-[7vw] font-bold"> Products</h4>
+        <h4 className="text-[7vw] font-bold"> Shop</h4>
+        <h4 className="text-[7vw] font-bold"> Contact</h4>
+      </div>
+
+      <div className="first relative flex items-center justify-center w-full h-screen bg-gradient-to-br from-orange-400 to-orange-600">
         <h1 className="text-[25vw] text-white font-bold absolute">FANTA</h1>
         <img
           decoding="async"
           id="orange-cut"
           src={orangeCut}
           alt="Orange cut"
-          className="absolute top-[10%] left-[32%] w-[15%] z-10 transition-all duration-500 ease-in-out"
+          className="absolute top-[10%] left-[32%] w-[15%] transition-all duration-500 ease-in-out"
         />
         <img
           decoding="async"
           id="fanta"
           src={fanta}
           alt="Fanta bottle"
-          className="absolute w-[40%] z-20 transition-all duration-500 ease-in-out"
+          className="absolute w-[40%] transition-all duration-500 ease-in-out"
         />
         <img
           decoding="async"
           id="orange"
           src={orange}
           alt="Orange"
-          className="absolute top-[55%] right-[30%] w-[20%] z-30 transition-all duration-500 ease-in-out"
+          className="absolute top-[55%] right-[30%] w-[20%] transition-all duration-500 ease-in-out"
         />
         <img
           decoding="async"
@@ -210,7 +277,7 @@ export default function App() {
         />
       </div>
 
-      <div className="flex w-full h-screen bg-[#4d231c]">
+      <div className="second flex w-full h-screen bg-[#4d231c]">
         <div className="flex flex-col items-center justify-center gap-[5vh] w-1/2 h-full">
           {/* Left side content here */}
         </div>
@@ -222,7 +289,7 @@ export default function App() {
         </div>
       </div>
 
-      <div className="relative flex items-center justify-center gap-[5vw] w-full h-screen bg-gradient-to-br from-orange-400 to-orange-600">
+      <div className="third relative flex items-center justify-center gap-[5vw] w-full h-screen bg-gradient-to-br from-orange-400 to-orange-600">
         <div className="relative flex flex-col items-center justify-center gap-[2vh] w-[25vw] h-[70vh] mt-[10vh] rounded-[20px] bg-white">
           <img
             decoding="async"
