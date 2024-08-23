@@ -150,12 +150,12 @@ export default function App() {
     });
 
     tl3
-      .from(
+      .to(
         ".lemon1",
         {
           rotate: "-90deg",
-          left: "-100%",
-          top: "110%",
+          left: "9%",
+          top: "0%",
         },
         "ca"
       )
@@ -168,12 +168,12 @@ export default function App() {
         },
         "ca"
       )
-      .from(
+      .to(
         ".lemon2",
         {
           rotate: "90deg",
-          left: "100%",
-          top: "110%",
+          right: "9%",
+          top: "0%",
         },
         "ca"
       )
@@ -220,7 +220,7 @@ export default function App() {
 
   return (
     <div id="main" className="w-screen  bg-orange-600 overflow-hidden relative">
-      <nav className="fixed flex items-center justify-between w-full h-[10vh] p-0 px-[10vw] z-50">
+      <nav className="fixed flex items-center justify-between w-full h-[10vh] p-0 px-[10vw] z-50 font-bold">
         <a href="#" className="text-white text-[1vw] no-underline">
           ABHISHEK
         </a>
@@ -339,13 +339,13 @@ export default function App() {
         </div>
       </div>
 
-      <div className="third relative flex items-center justify-center gap-[5vw] w-full h-screen bg-gradient-to-br from-orange-400 to-orange-600 pt-20">
+      <div className="third relative flex items-center justify-center gap-[5vw] w-full h-screen bg-gradient-to-br from-orange-400 to-orange-600 pt-10">
         <div className="relative flex flex-col items-center justify-center gap-[2vh] w-[25vw] h-[70vh] mt-[10vh] rounded-[20px] bg-white">
           <img
             id="cocacola"
             src={cocacola}
             alt="Coca Cola"
-            className="absolute top-[30%] w-[60%] left-[-30%] transform-translate-x-1/2 transition-all duration-500 ease-in-out rotate-[-35deg]"
+            className="absolute top-[30%] w-[60%] left-[-30%] transform-translate-x-1/2 transition-all duration-500 ease-in-out rotate-[-35deg] z-20"
           />
           <h1 className="mt-[40vh] text-[3vw]">CocaCola</h1>
           <button className="text-white bg-orange-500 rounded-full border-none text-[1vw] py-[1vw] px-[2vw]">
@@ -363,7 +363,7 @@ export default function App() {
             id="pepsi"
             src={pepsi}
             alt="Pepsi"
-            className="absolute top-[50%] w-[85%] right-[-100%] transform -translate-x-1/2 transition-all duration-500 ease-in-out rotate-[35deg]"
+            className="absolute top-[50%] w-[85%] right-[-100%] transform -translate-x-1/2 transition-all duration-500 ease-in-out rotate-[35deg] z-20"
           />
           <h1 className="mt-[40vh] text-[3vw]">Pepsi</h1>
           <button className="text-white bg-orange-500 rounded-full border-none text-[1vw] py-[1vw] px-[2vw]">
@@ -372,12 +372,12 @@ export default function App() {
         </div>
 
         <img
-          className="lemon1 absolute top-[110%] left-[-100%] w-[15%] transition-all duration-500 ease-in-out"
+          className="lemon1 absolute top-[70%] left-[10%] w-[24%] transition-all duration-500 ease-in-out"
           src={lemon}
           alt="Lemon 1"
         />
         <img
-          className="lemon2 absolute top-[110%] left-[100%] w-[15%] transition-all duration-500 ease-in-out"
+          className="lemon2 absolute right-[-10%] top-[70%] w-[24%] transition-all duration-500 ease-in-out"
           src={lemon}
           alt="Lemon 2"
         />
