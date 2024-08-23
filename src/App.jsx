@@ -9,6 +9,8 @@ import leaf2 from "./assets/leaf2.png";
 import cocacola from "./assets/cocacola.png";
 import pepsi from "./assets/pepsi.png";
 import coconutleaf from "./assets/coconoutleaf.png";
+import lemon from "./assets/lemon.webp";
+
 import "./App.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -20,11 +22,11 @@ export default function App() {
   useEffect(() => {
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: ".two",
+        trigger: ".second",
         start: "0% 95%",
         end: "70% 50%",
         scrub: true,
-        markers: true,
+        // markers: true,
       },
     });
 
@@ -74,7 +76,7 @@ export default function App() {
 
     const tl2 = gsap.timeline({
       scrollTrigger: {
-        trigger: ".three",
+        trigger: ".third",
         start: "0% 95%",
         end: "20% 50%",
         scrub: true,
@@ -83,6 +85,71 @@ export default function App() {
     });
 
     tl2
+      // .from(
+      //   ".lemon1",
+      //   {
+      //     rotate: "-90deg",
+      //     left: "-100%",
+      //     top: "110%",
+      //   },
+      //   "ca"
+      // )
+      // .from(
+      //   "#cocacola",
+      //   {
+      //     rotate: "-90deg",
+      //     top: "110%",
+      //     left: "-100%",
+      //   },
+      //   "ca"
+      // )
+      // .from(
+      //   ".lemon2",
+      //   {
+      //     rotate: "90deg",
+      //     left: "100%",
+      //     top: "110%",
+      //   },
+      //   "ca"
+      // )
+      // .from(
+      //   "#pepsi",
+      //   {
+      //     rotate: "90deg",
+      //     top: "110%",
+      //     left: "100%",
+      //   },
+      //   "ca"
+      // )
+
+      .to(
+        "#orange-cut",
+        {
+          left: "40%",
+          top: "200%",
+        },
+        "ca"
+      )
+      .to(
+        "#fanta",
+        {
+          top: "208%",
+          left: "30%",
+        },
+        "ca"
+      );
+
+    const tl3 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".third",
+        start: "0% 50%",
+        end: "20% 15%",
+        scrub: true,
+        // markers: true,
+      },
+    });
+
+    tl3
       .from(
         ".lemon1",
         {
@@ -92,12 +159,12 @@ export default function App() {
         },
         "ca"
       )
-      .from(
+      .to(
         "#cocacola",
         {
-          rotate: "-90deg",
-          top: "110%",
-          left: "-100%",
+          rotate: "0deg",
+          top: "-20%",
+          left: "22%",
         },
         "ca"
       )
@@ -110,30 +177,12 @@ export default function App() {
         },
         "ca"
       )
-      .from(
+      .to(
         "#pepsi",
         {
-          rotate: "90deg",
-          top: "110%",
-          left: "100%",
-        },
-        "ca"
-      )
-      .to(
-        "#orange-cut",
-        {
-          width: "18%",
-          left: "42%",
-          top: "204%",
-        },
-        "ca"
-      )
-      .to(
-        "#fanta",
-        {
-          width: "35%",
-          top: "210%",
-          left: "33%",
+          rotate: "0deg",
+          top: "-20%",
+          left: "50%",
         },
         "ca"
       );
@@ -143,17 +192,16 @@ export default function App() {
     navtl.to(".fullnav", {
       right: 0,
       duration: 0.6,
+      ease: "power2.inOut",
     });
 
-    navtl.from(
-      ".fullnav h4",
-      {
-        duration: 0.7,
-        stagger: 0.3,
-   
-      }
-    );
-    
+    navtl.to(".fullnav h4", {
+      duration: 0.5,
+      stagger: 0.3,
+      right: "0%",
+      opacity: 1,
+    });
+
     navtlRef.current = navtl;
   }, []);
 
@@ -164,17 +212,14 @@ export default function App() {
       navtlRef.current.play();
     }
   };
-
   const handleCloseClick = () => {
     if (navtlRef.current) {
-      navtlRef.current.reverse();
+      navtlRef.current.timeScale(1).reverse(); // Play in reverse at double speed
     }
-  }; 
+  };
+
   return (
-    <div
-      id="main"
-      className="w-screen h-screen bg-orange-600 overflow-x-hidden relative"
-    >
+    <div id="main" className="w-screen  bg-orange-600 overflow-hidden relative">
       <nav className="fixed flex items-center justify-between w-full h-[10vh] p-0 px-[10vw] z-50">
         <a href="#" className="text-white text-[1vw] no-underline">
           ABHISHEK
@@ -209,67 +254,72 @@ export default function App() {
         </i>
       </nav>
 
-      <div className="fullnav flex flex-col fixed top-0 right-[-40%] w-[40%] h-screen  z-50 justify-center align-center ">
-
-      <i
-          className="text-black text-[3vw] cursor-pointer absolute top-4 right-4"
+      <div className="fullnav flex flex-col fixed top-0 right-[-40%] w-[40%] h-screen  z-50 justify-center align-center pl-6">
+        <i
+          className="text-black text-[3vw] cursor-pointer absolute top-4 right-4 "
           onClick={handleCloseClick}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="w-8 h-8"
+            className="w-8 h-8 "
           >
-            <path d="M18 6L6 18M6 6l12 12"></path>
+            <path d="M10.5859 12L2.79297 4.20706L4.20718 2.79285L12.0001 10.5857L19.793 2.79285L21.2072 4.20706L13.4143 12L21.2072 19.7928L19.793 21.2071L12.0001 13.4142L4.20718 21.2071L2.79297 19.7928L10.5859 12Z"></path>
           </svg>
         </i>
 
-        <h4 className="text-[7vw] font-bold"> Home</h4>
-        <h4 className="text-[7vw] font-bold"> Products</h4>
-        <h4 className="text-[7vw] font-bold"> Shop</h4>
-        <h4 className="text-[7vw] font-bold"> Contact</h4>
+        <h4 className="text-[7vw] relative right-[-30%] opacity-0 font-bold">
+          {" "}
+          Home
+        </h4>
+        <h4 className="text-[7vw] relative right-[-30%] opacity-0 font-bold">
+          {" "}
+          Products
+        </h4>
+        <h4 className="text-[7vw] relative right-[-30%] opacity-0 font-bold">
+          {" "}
+          Shop
+        </h4>
+        <h4 className="text-[7vw] relative right-[-30%] opacity-0 font-bold">
+          {" "}
+          Contact
+        </h4>
       </div>
 
       <div className="first relative flex items-center justify-center w-full h-screen bg-gradient-to-br from-orange-400 to-orange-600">
         <h1 className="text-[25vw] text-white font-bold absolute">FANTA</h1>
         <img
-          decoding="async"
           id="orange-cut"
           src={orangeCut}
           alt="Orange cut"
-          className="absolute top-[10%] left-[32%] w-[15%] transition-all duration-500 ease-in-out"
+          className="absolute top-[10%] left-[32%] w-[20%] transition-all duration-500 ease-in-out z-10"
         />
         <img
-          decoding="async"
           id="fanta"
           src={fanta}
           alt="Fanta bottle"
-          className="absolute w-[40%] transition-all duration-500 ease-in-out"
+          className="absolute w-[40%] transition-all duration-500 ease-in-out z-20"
         />
         <img
-          decoding="async"
           id="orange"
           src={orange}
           alt="Orange"
           className="absolute top-[55%] right-[30%] w-[20%] transition-all duration-500 ease-in-out"
         />
         <img
-          decoding="async"
           id="leaf"
           src={leaf}
           alt="Leaf"
           className="absolute top-[10%] left-0 w-[18%] rotate-[60deg] transition-all duration-500 ease-in-out"
         />
         <img
-          decoding="async"
           id="leaf2"
           src={leaf2}
           alt="Leaf 2"
           className="absolute top-[70%] left-[80%] w-[12%] rotate-[-90deg] transition-all duration-500 ease-in-out"
         />
         <img
-          decoding="async"
           id="leaf3"
           src={coconutleaf}
           alt="Coconut leaf"
@@ -289,14 +339,13 @@ export default function App() {
         </div>
       </div>
 
-      <div className="third relative flex items-center justify-center gap-[5vw] w-full h-screen bg-gradient-to-br from-orange-400 to-orange-600">
+      <div className="third relative flex items-center justify-center gap-[5vw] w-full h-screen bg-gradient-to-br from-orange-400 to-orange-600 pt-20">
         <div className="relative flex flex-col items-center justify-center gap-[2vh] w-[25vw] h-[70vh] mt-[10vh] rounded-[20px] bg-white">
           <img
-            decoding="async"
             id="cocacola"
             src={cocacola}
             alt="Coca Cola"
-            className="absolute top-[-15%] w-[60%] left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out"
+            className="absolute top-[30%] w-[60%] left-[-30%] transform-translate-x-1/2 transition-all duration-500 ease-in-out rotate-[-35deg]"
           />
           <h1 className="mt-[40vh] text-[3vw]">CocaCola</h1>
           <button className="text-white bg-orange-500 rounded-full border-none text-[1vw] py-[1vw] px-[2vw]">
@@ -311,17 +360,27 @@ export default function App() {
         </div>
         <div className="relative flex flex-col items-center justify-center gap-[2vh] w-[25vw] h-[70vh] mt-[10vh] rounded-[20px] bg-white">
           <img
-            decoding="async"
             id="pepsi"
             src={pepsi}
             alt="Pepsi"
-            className="absolute top-[-15%] w-[85%] left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out"
+            className="absolute top-[50%] w-[85%] right-[-100%] transform -translate-x-1/2 transition-all duration-500 ease-in-out rotate-[35deg]"
           />
           <h1 className="mt-[40vh] text-[3vw]">Pepsi</h1>
           <button className="text-white bg-orange-500 rounded-full border-none text-[1vw] py-[1vw] px-[2vw]">
             Buy Now
           </button>
         </div>
+
+        <img
+          className="lemon1 absolute top-[110%] left-[-100%] w-[15%] transition-all duration-500 ease-in-out"
+          src={lemon}
+          alt="Lemon 1"
+        />
+        <img
+          className="lemon2 absolute top-[110%] left-[100%] w-[15%] transition-all duration-500 ease-in-out"
+          src={lemon}
+          alt="Lemon 2"
+        />
       </div>
     </div>
   );
